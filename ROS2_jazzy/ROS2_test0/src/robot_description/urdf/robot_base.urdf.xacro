@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org" name="robot_base">
+<!-- 1. Include the essentials file so we can use the wheel macro -->
+  <xacro:include filename="$(find robot_description)/urdf/robot_essentials.xacro" />
+
+  <!-- Les liens (links) et articulations (joints) seront ajoutés ici -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5707963267949 0 3.14" />
+      <geometry>
+        <mesh filename="package://robot_description/meshes/robot_base.stl" />
+      </geometry>
+      <material name="base_material">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+
+  <!-- 2. Call the macro to create the 4 wheels -->
+  <xacro:robot_wheel prefix="front_left"/>
+  <xacro:robot_wheel prefix="front_right"/>
+  <xacro:robot_wheel prefix="rear_left"/>
+  <xacro:robot_wheel prefix="rear_right"/>
+
+  <!-- ADD THIS BLOCK: Wheel joints linking the wheels to the chassis -->
+  <xacro:wheel_joint prefix="front_left" origin="0.220 0.250 0"/>
+  <xacro:wheel_joint prefix="front_right" origin="0.220 -0.250 0"/>
+  <xacro:wheel_joint prefix="rear_left" origin="-0.220 0.250 0"/>
+  <xacro:wheel_joint prefix="rear_right" origin="-0.220 -0.250 0"/>
+
+</robot>
